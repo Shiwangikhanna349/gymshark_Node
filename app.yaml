@@ -1,0 +1,12 @@
+runtime: nodejs18
+instance_class: F2  # You can adjust the instance type based on your needs.
+
+# Optional: Automatic scaling (adjust as needed)
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  min_instances: 1
+  max_instances: 5
+
+# Optionally, you can add environment variables for your Node.js app
+env_variables:
+  NODE_ENV: production
