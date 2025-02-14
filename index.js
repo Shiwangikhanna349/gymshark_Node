@@ -2,11 +2,12 @@ const express = require("express");
 const Razorpay = require("razorpay");
 const cors = require("cors");
 const crypto = require("crypto");
+const admin = require("firebase-admin");
+const db = require("./firebase");
 require("dotenv").config();
 const emailRoutes = require("./routes/emailRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-const dataRoutes=require("./routes/dataRoutes");
-
+// const dataRoutes=require("./routes/dataRoutes");
 
 const app = express();
 
@@ -67,11 +68,23 @@ app.post("/order/validate", async (req, res) => {
   }
 });
 
+// app.post("/data/save", async (req, res) => {
+//   try {
+//     const docRef = await db.collection("data").add({
+//       ...req.body,
+//       createdAt: admin.firestore.FieldValue.serverTimestamp(),
+//     });
 
+//     res.status(201).json({ message: "Data saved", id: docRef.id });
+//   } catch (error) {
+//     console.error("Error saving data:", error);
+//     res.status(500).json({ error: "Failed to save data" });
+//   }
+// });
 
 app.use("/order", orderRoutes);
 app.use("/email", emailRoutes);
-app.use("/data",dataRoutes)
+// app.use("/data",dataRoutes)
 
 app.get("/", (req, res) => {
   res.send("working");
